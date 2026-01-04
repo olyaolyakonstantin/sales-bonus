@@ -88,7 +88,7 @@ function analyzeSalesData(data, options) {
         // Увеличить количество продаж 
         seller.sales_count++;
         // Увеличить общую сумму выручки всех продаж
-        seller.revenue = seller.revenue + record.total_amount - record.total_discount; 
+        seller.revenue = seller.revenue + record.total_amount; 
 
         // Расчёт прибыли для каждого товара
         record.items.forEach(item => {
