@@ -108,13 +108,12 @@ function analyzeSalesData(data, options) {
         });
      });
     
-
+    // Сортировка продавцов по прибыли
+    sellerStats.sort((a, b) => b.profit - a.profit);
     // Назначение премий на основе ранжирования
     sellerStats.forEach((seller, index) => {
-        // Сортировка продавцов по прибыли
-        const sortedByProfit = [...sellerStats].sort((a, b) => b.profit - a.profit);
         // Место в рейтинге по прибыли
-        const rankIndex = sortedByProfit.findIndex(s => s.id === seller.id);
+        const rankIndex = sellerStats.findIndex(s => s.id === seller.id);
 
         seller.bonus = calculateBonus(
             rankIndex,              
