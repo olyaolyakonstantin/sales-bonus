@@ -99,12 +99,12 @@ function analyzeSalesData(data, options) {
             const revenue = calculateRevenue(item)
             // Посчитать прибыль: выручка минус себестоимость
             const profit = revenue - cost;
-        // Увеличить общую накопленную прибыль (profit) у продавца  
+            // Увеличить общую накопленную прибыль (profit) у продавца  
             seller.profit += profit;
             if (!seller.products_sold[item.sku]) {
                 seller.products_sold[item.sku] = 0;
             }
-            seller.products_sold[item.sku]++;
+            seller.products_sold[item.sku] += item.quantity;
         });
      });
     
@@ -126,7 +126,6 @@ function analyzeSalesData(data, options) {
                                     .slice(0, 10)
                                     .map(([sku, quantity]) => ({ sku, quantity }))
     });
-
     // Подготовка итоговой коллекции с нужными полями
     return sellerStats.map(seller => ({
             seller_id: seller.id,
