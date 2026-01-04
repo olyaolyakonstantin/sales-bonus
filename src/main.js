@@ -88,11 +88,7 @@ function analyzeSalesData(data, options) {
         // Увеличить количество продаж 
         seller.sales_count++;
         // Увеличить общую сумму выручки всех продаж
-        seller.revenue += record.total_amount 
-        seller.revenue -= record.total_discount;
-        // console.log('seller.revenue: ', seller.revenue)
-        // console.log('record.total_amount: ', record.total_amount)
-        // console.log('record.total_discount: ', record.total_discount)
+        seller.revenue = seller.revenue + record.total_amount - record.total_discount; 
 
         // Расчёт прибыли для каждого товара
         record.items.forEach(item => {
@@ -127,8 +123,8 @@ function analyzeSalesData(data, options) {
         );
         seller.top_products = Object.entries(seller.products_sold || {})
                                     .sort((a, b) => b[1] - a[1])  // Формируем топ-10 товаров
+                                    .slice(0, 10)
                                     .map(([sku, quantity]) => ({ sku, quantity }))
-                                    .slice(0, 10);
     });
 
     // Подготовка итоговой коллекции с нужными полями
